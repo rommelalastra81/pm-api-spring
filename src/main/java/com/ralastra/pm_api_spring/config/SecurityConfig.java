@@ -25,10 +25,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors(cors -> cors.disable())  // We're using @CrossOrigin on controllers
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()        // Login is public
-                .requestMatchers("/api/user/createuser").permitAll() // Sign up is public
+                .requestMatchers("/api/login").permitAll()        // Login is public
+                .requestMatchers("/api/User/createuser").permitAll() // Sign up is public
+                .requestMatchers("/error").permitAll()  // Allow error endpoint
                 .anyRequest().authenticated()                        // Everything else requires token
             )
             .sessionManagement(session -> session

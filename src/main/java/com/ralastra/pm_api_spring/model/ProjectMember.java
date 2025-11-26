@@ -7,43 +7,43 @@ public class ProjectMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "user_id", nullable = false)
     @JsonProperty("user_id")
-    private Long userId;
+    private Integer userId;
 
     @Column(name = "project_id", nullable = false)
     @JsonProperty("project_id")
-    private Long projectId;
+    private Integer projectId;
 
-    public ProjectMember(Long userId, Long projectId) {
+    public ProjectMember(Integer userId, Integer projectId) {
         this.userId = userId;
         this.projectId = projectId;
     }
 
     // Getters and Setters
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public Long getProjectId() {
+    public Integer getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(Integer projectId) {
         this.projectId = projectId;
     }
 }

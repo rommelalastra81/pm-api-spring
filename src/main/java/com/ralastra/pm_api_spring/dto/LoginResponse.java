@@ -10,7 +10,7 @@ public class LoginResponse {
     private String type = "Bearer";
     
     @JsonProperty("user_id")
-    private Long userId;
+    private Integer userId;
     
     @JsonProperty("email")
     private String email;
@@ -22,7 +22,7 @@ public class LoginResponse {
     public LoginResponse() {
     }
     
-    public LoginResponse(String token, Long userId, String email, String fullName) {
+    public LoginResponse(String token, Integer userId, String email, String fullName) {
         this.token = token;
         this.userId = userId;
         this.email = email;
@@ -46,11 +46,11 @@ public class LoginResponse {
         this.type = type;
     }
     
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
     
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
     

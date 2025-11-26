@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     
     @Override
     @Transactional(readOnly = true)
-    public UserDTO getUserById(Long id) {
+    public UserDTO getUserById(Integer id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
         return convertToDTO(user);
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public UserDTO updateUser(Long id, UpdateUserRequest request) {
+    public UserDTO updateUser(Integer id, UpdateUserRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
         
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(Integer id) {
         if (!userRepository.existsById(id)) {
             throw new RuntimeException("User not found with id: " + id);
         }
