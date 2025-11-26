@@ -1,7 +1,12 @@
 package com.ralastra.pm_api_spring.model;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "project_members")
 public class ProjectMember {
 
     @Id
@@ -9,17 +14,26 @@ public class ProjectMember {
     @JsonProperty("id")
     private Integer id;
 
-    @Column(name = "user_id", nullable = false)
-    @JsonProperty("user_id")
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    private User user;
 
-    @Column(name = "project_id", nullable = false)
-    @JsonProperty("project_id")
-    private Integer projectId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = false)
+    @JsonIgnore
+    private Project project;
 
-    public ProjectMember(Integer userId, Integer projectId) {
-        this.userId = userId;
-        this.projectId = projectId;
+    @OneToMany(mappedBy = "projectMember", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<MemberRole> memberRoles = new ArrayList<>();
+
+    public ProjectMember() {
+    }
+
+    public ProjectMember(User user, Project project) {
+        this.user = user;
+        this.project = project;
     }
 
     // Getters and Setters
@@ -31,19 +45,38 @@ public class ProjectMember {
         this.id = id;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public List<MemberRole> getMemberRoles() {
+        return memberRoles;
+    }
+
+    public void setMemberRoles(List<MemberRole> memberRoles) {
+        this.memberRoles = memberRoles;
+    }
+
+    // Helper methods for JSON output
+    @JsonProperty("user_id")
     public Integer getUserId() {
-        return userId;
+        return user != null ? user.getId() : null;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
+    @JsonProperty("project_id")
     public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+        return project != null ? project.getId() : null;
     }
 }

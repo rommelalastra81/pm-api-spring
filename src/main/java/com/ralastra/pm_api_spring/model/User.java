@@ -2,6 +2,9 @@ package com.ralastra.pm_api_spring.model;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -27,6 +30,11 @@ public class User {
     @Column(name = "job_role")
     @JsonProperty("job_role")
     private String jobRole;
+    
+    // Relationships
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore  // Prevent infinite recursion in JSON serialization
+    private List<ProjectMember> projectMembers = new ArrayList<>();
     
     // Constructors
     public User() {
@@ -78,5 +86,14 @@ public class User {
     
     public void setJobRole(String jobRole) {
         this.jobRole = jobRole;
+    }
+    
+    // Relationship getters and setters
+    public List<ProjectMember> getProjectMembers() {
+        return projectMembers;
+    }
+    
+    public void setProjectMembers(List<ProjectMember> projectMembers) {
+        this.projectMembers = projectMembers;
     }
 }

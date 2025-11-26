@@ -1,7 +1,10 @@
 package com.ralastra.pm_api_spring.model;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -31,6 +34,15 @@ public class Project {
     @Column(name = "target_completion", nullable = false)
     @JsonProperty("target_completion")
     private LocalDate  targetCompletion;
+    
+    // Relationships
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore  // Prevent infinite recursion in JSON serialization
+    private List<ProjectMember> projectMembers = new ArrayList<>();
+    
+    // Constructors
+    public Project() {
+    }
 
     public Project(String name, String description, String status, LocalDate startDate, LocalDate targetCompletion) {
         this.name = name;
@@ -77,7 +89,7 @@ public class Project {
         return startDate;
     }
 
-    public void setJobRole(LocalDate startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
@@ -88,5 +100,13 @@ public class Project {
     public void setTargetCompletion(LocalDate targetCompletion) {
         this.targetCompletion = targetCompletion;
     }
-
+    
+    // Relationship getters and setters
+    public List<ProjectMember> getProjectMembers() {
+        return projectMembers;
+    }
+    
+    public void setProjectMembers(List<ProjectMember> projectMembers) {
+        this.projectMembers = projectMembers;
+    }
 }
