@@ -1,9 +1,18 @@
 package com.ralastra.pm_api_spring.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserDTO {
+    @JsonProperty("id")
     private Long id;
+    
+    @JsonProperty("full_name")
     private String fullName;
+    
+    @JsonProperty("email")
     private String email;
+    
+    @JsonProperty("job_role")
     private String jobRole;
     
     // Constructors

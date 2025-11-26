@@ -1,31 +1,38 @@
 package com.ralastra.pm_api_spring.model;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "projects")
-public class Projects {
+public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private Long id;
 
     @Column(name = "name", nullable = false)
+    @JsonProperty("name")
     private String name;
 
     @Column(name = "description")
+    @JsonProperty("description")
     private String description;
 
-    @Column(name = "password")
+    @Column(name = "status")
+    @JsonProperty("status")
     private String status;
 
     @Column(name = "start_date")
+    @JsonProperty("start_date")
     private LocalDate startDate;
 
     @Column(name = "target_completion", nullable = false)
+    @JsonProperty("target_completion")
     private LocalDate  targetCompletion;
 
-    public Projects(String name, String description, String status, LocalDate startDate, LocalDate targetCompletion) {
+    public Project(String name, String description, String status, LocalDate startDate, LocalDate targetCompletion) {
         this.name = name;
         this.description = description;
         this.status = status;

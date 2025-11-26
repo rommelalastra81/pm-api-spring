@@ -1,9 +1,18 @@
 package com.ralastra.pm_api_spring.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UpdateUserRequest {
+    @JsonProperty("full_name")
     private String fullName;
+    
+    @JsonProperty("email")
     private String email;
+    
+    @JsonProperty("password")
     private String password;
+    
+    @JsonProperty("job_role")
     private String jobRole;
     
     // Constructors

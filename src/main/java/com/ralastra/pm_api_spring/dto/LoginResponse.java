@@ -1,10 +1,21 @@
 package com.ralastra.pm_api_spring.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class LoginResponse {
+    @JsonProperty("token")
     private String token;
+    
+    @JsonProperty("type")
     private String type = "Bearer";
+    
+    @JsonProperty("user_id")
     private Long userId;
+    
+    @JsonProperty("email")
     private String email;
+    
+    @JsonProperty("full_name")
     private String fullName;
     
     // Constructors

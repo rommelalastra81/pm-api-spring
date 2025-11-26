@@ -1,6 +1,7 @@
 package com.ralastra.pm_api_spring.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "users")
@@ -8,18 +9,23 @@ public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private Long id;
     
     @Column(name = "full_name", nullable = false)
+    @JsonProperty("full_name")
     private String fullName;
     
     @Column(name = "email", nullable = false, unique = true)
+    @JsonProperty("email")
     private String email;
     
     @Column(name = "password", nullable = false)
+    @JsonProperty("password")
     private String password;
     
     @Column(name = "job_role")
+    @JsonProperty("job_role")
     private String jobRole;
     
     // Constructors
