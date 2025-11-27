@@ -21,8 +21,8 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/getallprojects")
-    public ResponseEntity<List<ProjectDTO>> getAllProjects() {
+    @GetMapping("/getprojects")
+    public ResponseEntity<List<ProjectDTO>> getProjects() {
         List<ProjectDTO> projects = projectService.getAllProjects();
         return ResponseEntity.ok(projects);
     }
