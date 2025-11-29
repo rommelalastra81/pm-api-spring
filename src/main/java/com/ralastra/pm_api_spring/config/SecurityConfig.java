@@ -39,6 +39,7 @@ public class SecurityConfig {
                  //temporary
                 .requestMatchers("/api/Project/getprojects").permitAll() // Sign up is public
                 .requestMatchers("/api/Task/createtask").permitAll() // Sign up is public
+                .requestMatchers("/api/ProjectMember/addprojectmembers/*").permitAll() // Sign up is public
                  //temporary
 
                 .requestMatchers("/error").permitAll()  // Allow error endpoint
