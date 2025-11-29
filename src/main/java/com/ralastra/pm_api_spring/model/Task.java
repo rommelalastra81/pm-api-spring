@@ -165,10 +165,26 @@ public class Task {
         this.dueDate = dueDate;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
 
     // Helper methods for JSON output
     @JsonProperty("assigned_to")
-    public Integer getUserId() {
+    public Integer getAssignedTo() {
         return user != null ? user.getId() : null;
     }
 
