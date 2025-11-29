@@ -1,85 +1,64 @@
-package com.ralastra.pm_api_spring.model;
+package com.ralastra.pm_api_spring.dto;
 
-import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
-@Table(name = "tasks")
-public class Task {
+public class TaskDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
     private Integer id;
 
-    @Column(name = "title", nullable = false)
     @JsonProperty("title")
     private String title;
 
-    @Column(name = "description")
     @JsonProperty("description")
     private String description;
 
-    @Column(name = "task_type")
     @JsonProperty("task_type")
     private String taskType;
 
-    @Column(name = "status")
-    @JsonProperty("status")
-    private String status;
-
-    @Column(name = "priority")
     @JsonProperty("priority")
     private String priority;
 
-    @Column(name = "percentage_done")
+    @JsonProperty("status")
+    private String status;
+
     @JsonProperty("percentage_done")
     private Integer percentageDone;
 
-    @Column(name = "start_date")
+    @JsonProperty("assigned_to")
+    private Integer assignedTo;
+
+    @JsonProperty("project_id")
+    private Integer projectId;
+
     @JsonProperty("start_date")
     private LocalDate startDate;
 
-    @Column(name = "completion_date")
     @JsonProperty("completion_date")
     private LocalDate completionDate;
 
-    @Column(name = "due_date", nullable = false)
     @JsonProperty("due_date")
     private LocalDate dueDate;
 
-    //many to one
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assigned_to")
-    @JsonIgnore
-    private User user;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id", nullable = false)
-    @JsonIgnore
-    private Project project;
-
     // Constructors
-    public Task() {
-    }
-
-    public Task(String title, String description, String taskType, String status, Integer percentageDone,
-                String priority, LocalDate startDate, LocalDate completionDate, LocalDate dueDate, User user, Project project) {
+    public TaskDTO(Integer id, String title, String description, String status, String taskType, String priority,
+                   Integer percentageDone, Integer assignedTo, Integer projectId, LocalDate startDate, LocalDate completionDate,
+                    LocalDate dueDate) {
+        this.id = id;
         this.title = title;
         this.description = description;
-        this.taskType = taskType;
         this.status = status;
-        this.percentageDone = percentageDone;
+        this.taskType = taskType;
         this.priority = priority;
+        this.percentageDone = percentageDone;
+        this.assignedTo = assignedTo;
+        this.projectId = projectId;
         this.startDate = startDate;
         this.completionDate = completionDate;
         this.dueDate = dueDate;
-        this.user = user;
-        this.project = project;
+
     }
 
     //getter and setter
@@ -141,6 +120,25 @@ public class Task {
         this.percentageDone = percentageDone;
     }
 
+
+    public Integer getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(Integer assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
+
+
     public LocalDate getStartDate() {
         return startDate;
     }
@@ -163,17 +161,5 @@ public class Task {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
-    }
-
-
-    // Helper methods for JSON output
-    @JsonProperty("assigned_to")
-    public Integer getUserId() {
-        return user != null ? user.getId() : null;
-    }
-
-    @JsonProperty("project_id")
-    public Integer getProjectId() {
-        return project != null ? project.getId() : null;
     }
 }
