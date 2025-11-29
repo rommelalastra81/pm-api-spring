@@ -1,7 +1,6 @@
 package com.ralastra.pm_api_spring.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.LocalDate;
 
 public class TaskDTO {

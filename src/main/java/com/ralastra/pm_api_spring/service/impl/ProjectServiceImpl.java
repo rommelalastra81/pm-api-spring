@@ -4,7 +4,6 @@ import com.ralastra.pm_api_spring.dto.ProjectDTO;
 import com.ralastra.pm_api_spring.model.Project;
 import com.ralastra.pm_api_spring.repository.ProjectRepository;
 import com.ralastra.pm_api_spring.service.ProjectService;
-import com.ralastra.pm_api_spring.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

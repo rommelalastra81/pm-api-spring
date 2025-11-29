@@ -1,8 +1,6 @@
 package com.ralastra.pm_api_spring.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDate;
 
 public class ProjectDTO {
