@@ -35,7 +35,11 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/login").permitAll()        // Login is public
                 .requestMatchers("/api/User/createuser").permitAll() // Sign up is public
-                //.requestMatchers("/api/Project/getprojects").permitAll() // Sign up is public
+
+                 //temporary
+                .requestMatchers("/api/Project/getprojects").permitAll() // Sign up is public
+                 //temporary
+
                 .requestMatchers("/error").permitAll()  // Allow error endpoint
                 .anyRequest().authenticated()                        // Everything else requires token
             )

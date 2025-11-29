@@ -39,6 +39,10 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore  // Prevent infinite recursion in JSON serialization
     private List<ProjectMember> projectMembers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Task> tasks = new ArrayList<>();
     
     // Constructors
     public Project() {
@@ -108,5 +112,13 @@ public class Project {
     
     public void setProjectMembers(List<ProjectMember> projectMembers) {
         this.projectMembers = projectMembers;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
